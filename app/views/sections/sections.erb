@@ -1,0 +1,10 @@
+<h3>Here are all study sections:</h3>
+
+
+<% @sections.each do |section| %>
+  <p><a href="/sections/<%=section.id%>"><%= section.name %></p>
+<% end  %>
+
+
+
+

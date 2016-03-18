@@ -1,25 +1,33 @@
 <!doctype html>
 <html>
   <head>
-    <title>Golf Club Organizer</title>
+    <title>Videolib</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   </head>
   <body>
     <nav>
       <% if logged_in? %>
+        <% @user = current_user %>
+        <a href="/sections"> All Sections</a>
+        <a href="/users/<%=@user.username%>/sections"> Your Sections</a>
+        <a href="/sections/new"> Create Section</a>
 
-        <a href="/clubs/new"> Create Club </a>
+        <a href="/videos"> All Videos</a>
+        <a href="/users/<%=@user.username%>/videos"> Your Videos</a>
+        <a href="/videos/new"> Create Video</a>
+
         <a href="/logout"> Log Out </a>
-        <p>Welcome, <%=current_user.username %></p>
+
+        <h4>Welcome, <%=current_user.username %>!</h4>
 
       <% else %>
         <a href="/signup">Sign Up</a>
-        <a href="/login"> Sign In </a>
-      <%end %>
+        <a href="/login"> Log In </a>
+      <% end %>
 
     </nav>
     <div class="container">
-      <h1>Golf Clubber</h1>
+      <h1>VideoLib</h1>
       <% if !@error_message.nil? %>
       <div class="alert alert-warning">
         <%= @error_message %>

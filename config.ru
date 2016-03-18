@@ -5,7 +5,7 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
-use ___Controller 
-use ___Controller  
+use VideosController 
+use SectionsController  
 use UsersController   
 run ApplicationController

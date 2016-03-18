@@ -1,0 +1,15 @@
+<h3>Here are your study sections</h3>
+
+<br>
+<% @user.sections.each do |section| %>
+  <p><a href="/sections/<%=section.id%>"><%= section.name %></p>
+<% end  %>
+
+<br>
+<form action="/sections/new" method="get">
+  <input type="submit" value="Add a Section"></input>
+</form>
+<br>
+<form action="/videos/new" method="get">
+  <input type="submit" value="Add a Video"></input>
+</form>

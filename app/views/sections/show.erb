@@ -1,0 +1,17 @@
+<h3>Study Section: <%=@section.name%></h3>
+ 
+ <form action="/sections/<%=@section.id%>/edit" method="get">
+  <input type="submit" value="Edit Section"></input>
+</form>
+
+<h3>Section Videos:</h3>
+
+<%=@videos%>
+
+
+
+<form action="/videos/new" method="get">
+  <input type="submit" value="Add Video"></input>
+</form>
+
+
