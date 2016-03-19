@@ -1,0 +1,97 @@
+@font-face {
+  font-family: "MoonLight";
+  src: url("../fonts/MoonLight.otf");
+}
+
+@font-face {
+  font-family: "MoonBold";
+  src: url("../fonts/MoonBold.otf");
+}
+
+/*body { 
+  background-image:url('/img/home-office-336377_1920.jpg');
+}*/
+
+.navbar-default .navbar-brand {
+  color:#CBD4D6;
+}
+
+h1 {
+  color:#80BCCF;
+}
+
+.navbar-inner {
+  background:transparent;
+}
+
+.navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus {
+    background:transparent;
+}
+
+ul.job-list
+{
+    list-style-type: none;
+}
+
+
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: #CBD4D6;
+}
+
+body {
+    font-family: 'MoonLight';
+    /* The background image */
+    color: #D7F2F7;/*
+    background-image: url('/img/home-office-336377_1920.jpg');*/
+    background-image: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url(/img/home-office-336377_1920.jpg)
+    ;
+    /* Set a specified height, or the minimum height for the background image */
+    min-height: 500px;
+    /* Set background image to fixed (don't scroll along with the page) */
+    background-attachment: fixed;
+    /* Center the background image */
+    background-position: center;
+    /* Set the background image to no repeat */
+    background-repeat: no-repeat;
+    /* Scale the background image to be as large as possible */
+    background-size: cover;
+}
+
+a:link {
+  color: #BA9D88;
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #BA9D88;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #337AB7;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+form label {
+  background-color: black;
+  color: white;
+}
+
+form {
+  color: black;
+}
+
+

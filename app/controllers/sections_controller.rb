@@ -1,15 +1,5 @@
 class SectionsController < ApplicationController 
 
-  get '/sections' do 
-    if logged_in?
-      #@user = current_user
-      @sections = Section.all
-      erb :'/sections/sections'
-    else
-      redirect_if_not_logged_in
-    end
-  end
-
   get '/sections/new' do 
     if logged_in?
       erb :'/sections/new'
@@ -23,7 +13,7 @@ class SectionsController < ApplicationController
     if logged_in?
       @section = Section.find_by_id(params[:id])
       @user = current_user
-      @videos = Video.all.select{|video| video.section_id == @section.id}
+      @videos = @section.videos
       erb :'/sections/show'
     else
       redirect_if_not_logged_in
@@ -43,7 +33,19 @@ class SectionsController < ApplicationController
       redirect_if_not_logged_in
     end
   end
-####### Post Methods #######
+
+get '/sections/:id/delete' do 
+  @user = current_user
+  @section = Section.find_by_id(params[:id])
+  @section.delete
+  redirect "/users/#{@user.slug}/sections"
+end
+
+
+
+
+
+
 
   post '/sections' do 
     #raise params.inspect
@@ -64,15 +66,26 @@ class SectionsController < ApplicationController
     else
       redirect "/sections/#{@section.id}/edit"
     end
-
   end
 
+#################### OLD VERSION ##################
+  #### is it useful to have a list of other students
+  #### sections? might show repeats.
+  get '/sections' do 
+    if logged_in?
+      @user = current_user
+      @sections = Section.all
+      erb :'/sections/sections'
+    else
+      redirect_if_not_logged_in
+    end
+  end
+####### 
+
+end #class 
 
 
 
 
 
 
-
-
-end

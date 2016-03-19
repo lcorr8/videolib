@@ -1,4 +1,4 @@
-<h2>Edite A Section(topic)</h2>
+<h2>Edit A Section(topic)</h2>
 <br>
 <form action="/sections/<%=@section.id%>" method="POST">
   
@@ -6,3 +6,7 @@ Section name:
   <input type="text" name="name" value="<%=@section.name%>"></input>
   <input type="submit" value="Edit"></input>
 </form>
+
+<% if @user.id == @section.user_id %>
+  <a href="/sections/<%=@section.id%>/delete">Delete Section</a>
+<% end %>

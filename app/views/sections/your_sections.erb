@@ -1,6 +1,7 @@
-<h3>Here are your study sections</h3>
-
+<h2>Which section would you like to review?</h2>
 <br>
+<h3>Full Stack Web Dev Program:</h3>
+
 <% @user.sections.each do |section| %>
   <p><a href="/sections/<%=section.id%>"><%= section.name %></p>
 <% end  %>
@@ -10,6 +11,3 @@
   <input type="submit" value="Add a Section"></input>
 </form>
 <br>
-<form action="/videos/new" method="get">
-  <input type="submit" value="Add a Video"></input>
-</form>

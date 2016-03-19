@@ -1,9 +1,9 @@
 class UsersController < ApplicationController 
 
-
   get '/signup' do
     if logged_in?
-      redirect '/sections'
+      @user = current_user
+      redirect redirect "/users/#{@user.slug}/sections"
     else
       erb :'/users/create_user'
     end
@@ -23,8 +23,9 @@ class UsersController < ApplicationController
   get '/login' do
     @error_message = params[:error]
     if logged_in?
-      redirect '/sections'
-    else #take you to login form
+      @user = current_user
+      redirect "/users/#{@user.slug}/sections"
+    else 
       erb :'/users/login'
     end
   end
@@ -34,16 +35,16 @@ class UsersController < ApplicationController
     #verify username and password
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
-      redirect '/sections'
+      redirect "/users/#{@user.slug}/sections"
     else
-      redirect '/'
+      redirect '/login'
     end
   end
 
   get '/logout' do 
     if logged_in?
       session.clear
-      redirect '/login'
+      redirect '/'
     else
       redirect '/'
     end
@@ -51,6 +52,7 @@ class UsersController < ApplicationController
 
   get '/users/:slug/sections' do 
     #raise params.inspect
+    #@error_message = params[:error]
     if logged_in?
     @users_page = User.find_by_slug(params["slug"])
     @user = current_user
@@ -64,6 +66,9 @@ class UsersController < ApplicationController
     end
   end
 
+
+
+#user video's list is kind of useless if not organized.
   get '/users/:slug/videos' do 
     #raise params.inspect
     if logged_in?
@@ -79,13 +84,12 @@ class UsersController < ApplicationController
       redirect '/'
     end
   end
+###################################################
+ 
+end #end of class
 
 
 
 
 
 
-
-
-
-end

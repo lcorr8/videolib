@@ -1,9 +1,21 @@
 <h3>Video info</h3>
 
+<p>Section: <%=@section.name%></p>  
 <p>Video name: <%=@video.name%></p>
 <p>Video year: <%=@video.year%></p>
 <p>Video link: <a href="<%=@video.link%>"><%=@video.link%></a></p>
-<p>Video section number: <%= @video.section_id %></p>
+<p>View status: <% if @video.watched == "yes" %>
+  <%= "viewed" %>
+  <% else %>
+  <%= "not yet" %>
+  <% end %></p>
+
+
+
+  <a href="/videos/<%=@video.id%>/edit">Edit Video</a>
+  <a href="/videos/<%=@video.id%>/delete">Delete Video</a>
+  <a href="/sections/<%=@video.section_id%>">Back to section</a>
+
 
 
 

@@ -1,5 +1,5 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <title>Videolib</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -8,14 +8,14 @@
     <nav>
       <% if logged_in? %>
         <% @user = current_user %>
-        <a href="/sections"> All Sections</a>
-        <a href="/users/<%=@user.username%>/sections"> Your Sections</a>
-        <a href="/sections/new"> Create Section</a>
-
+        <!--<a href="/sections"> All Sections</a>
         <a href="/videos"> All Videos</a>
+        
+        -->
+        <a href="/users/<%=@user.username%>/sections"> Your Sections</a>
+        <a href="/sections/new"> New Sections</a>
         <a href="/users/<%=@user.username%>/videos"> Your Videos</a>
-        <a href="/videos/new"> Create Video</a>
-
+        <a href="/videos/new"> New Video</a>
         <a href="/logout"> Log Out </a>
 
         <h4>Welcome, <%=current_user.username %>!</h4>
@@ -27,7 +27,7 @@
 
     </nav>
     <div class="container">
-      <h1>VideoLib</h1>
+      
       <% if !@error_message.nil? %>
       <div class="alert alert-warning">
         <%= @error_message %>

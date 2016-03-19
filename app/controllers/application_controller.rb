@@ -9,10 +9,14 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "videolecturesforme"
   end
 
-
-  get '/' do 
-    erb :index 
+get '/' do 
+  if logged_in?
+    @user = current_user
+    redirect redirect "/users/#{@user.slug}/sections"
+  else
+     erb :index
   end
+end
 
   helpers do
     def redirect_if_not_logged_in
@@ -28,6 +32,7 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
+
 
     
 
