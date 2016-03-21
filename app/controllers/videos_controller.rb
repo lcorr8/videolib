@@ -1,3 +1,5 @@
+require 'pry'
+
 class VideosController < ApplicationController 
 
   get '/videos/new' do 
@@ -13,11 +15,13 @@ class VideosController < ApplicationController
   post '/videos' do #from new video
     #raise params.inspect
     @user = current_user
-    @video = Video.new(name: params["name"], link: params["link"], year: params["year"], watched: params["watched"], section_id: params["section_id"])
+    @video = Video.new(name: params["name"], link: params["link"], year: params["year"], watched: params["watched"], embedded_link: params["embedded_link"], section_id: params["section_id"])
     @video.user_id = @user.id
     @video.save
     redirect "/sections/#{@video.section_id}"
   end
+
+  
 
   get '/videos/:id' do 
     if logged_in?
@@ -42,7 +46,21 @@ class VideosController < ApplicationController
   end
 
   post '/videos/:id/edit' do
+    @user = current_user
+    @video = Video.find_by(params[:id])
+    @video.name = params["name"]
+    @video.link = params["link"]
+    @video.year = params["year"]
+    @video.embedded_link = params["embedded_link"]
+    @video.watched = params["watched"]
+    @video.section_id = params["section_id"]
+    @video.save
+    redirect "/sections/#{@video.section_id}"
   end
+
+
+
+
 
   get '/videos/:id/delete' do 
     @user = current_user

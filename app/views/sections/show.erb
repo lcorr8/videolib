@@ -1,28 +1,34 @@
 
 <h2><%=@section.name%></h2>
 <% if @user.id == @section.user_id %>
-  <a href="/sections/<%=@section.id%>/edit">Edit Section</a>
+  <form action="/sections/<%=@section.id%>/edit" method="get">
+    <input type="submit" value="Edit Section"></input>
+  </form>
 <% end %>
  
 <br>
 
 <h3>Section Videos:</h3>
 <%@videos.each do |video|%>
-  <%= video.name %></a>: <%= video.year %>.  
-  <a href="https://www.youtube.com/watch?v=vRPZl5S8UNc">watch</a>   
-
-  <a href="/videos/<%= video.id %>">info</a>
-
+  <p><% if video.watched == "yes" %>
+    <%= "✓" %>
+  <% end %>  
+  <a href="/videos/<%= video.id %>"><%= video.name %></a>
+: <%= video.year %>. 
   <% if @user.id == @section.user_id %>
   <a href="/videos/<%=video.id%>/edit">edit</a>
   <a href="/videos/<%=video.id%>/delete">delete</a>
-  <% end %>
+  <% end %></p>
 
   <br>
 <% end %>
 <br>
 
 <% if @user.id == @section.user_id %>
-  <a href="/videos/new">Add Video</a>
+  <form action="/videos/new" method="get">
+    <input type="submit" value="Add Video"></input>
+  </form>
+
+  
 <% end %>
 

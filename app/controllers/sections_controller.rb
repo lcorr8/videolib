@@ -27,25 +27,27 @@ class SectionsController < ApplicationController
       if @user.id == @section.user_id
         erb :'/sections/edit'
       else
-        redirect "/users/#{@user.slug}/sections"
+        redirect "/users/#{@user.slug}/sections?error=Not your section to edit"
       end
     else
       redirect_if_not_logged_in
     end
   end
 
-get '/sections/:id/delete' do 
-  @user = current_user
-  @section = Section.find_by_id(params[:id])
-  @section.delete
-  redirect "/users/#{@user.slug}/sections"
-end
-
-
-
-
-
-
+  get '/sections/:id/delete' do 
+    if logged_in?
+      @user = current_user
+      @section = Section.find_by_id(params[:id])
+      if @user.id == @section.user_id
+        @section.delete        
+        redirect "/users/#{@user.slug}/sections"
+      else
+        redirect "/users/#{@user.slug}/sections?error=Not your section to delete"
+      end
+    else
+      redirect_if_not_logged_in
+    end
+  end
 
   post '/sections' do 
     #raise params.inspect

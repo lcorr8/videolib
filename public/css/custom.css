@@ -8,90 +8,38 @@
   src: url("../fonts/MoonBold.otf");
 }
 
-/*body { 
-  background-image:url('/img/home-office-336377_1920.jpg');
-}*/
-
-.navbar-default .navbar-brand {
-  color:#CBD4D6;
+nav {
+  font-family: "MoonLight";
+  font-size: 1.3em;
+  
 }
 
-h1 {
-  color:#80BCCF;
-}
-
-.navbar-inner {
-  background:transparent;
-}
-
-.navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus {
-    background:transparent;
-}
-
-ul.job-list
-{
-    list-style-type: none;
-}
-
-
-.navbar-toggle .icon-bar {
-    display: block;
-    width: 22px;
-    height: 2px;
-    border-radius: 1px;
-    background-color: #CBD4D6;
-}
 
 body {
-    font-family: 'MoonLight';
-    /* The background image */
-    color: #D7F2F7;/*
-    background-image: url('/img/home-office-336377_1920.jpg');*/
-    background-image: 
-    linear-gradient(
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
-    ),
-    url(/img/home-office-336377_1920.jpg)
-    ;
-    /* Set a specified height, or the minimum height for the background image */
-    min-height: 500px;
-    /* Set background image to fixed (don't scroll along with the page) */
-    background-attachment: fixed;
-    /* Center the background image */
-    background-position: center;
-    /* Set the background image to no repeat */
-    background-repeat: no-repeat;
-    /* Scale the background image to be as large as possible */
-    background-size: cover;
+  background-image: url('/img/white-pineapple.jpeg');
+  background-size: cover;
+  font-family: "MoonLight";
+  
 }
 
-a:link {
-  color: #BA9D88;
-  text-decoration: none;
+h2, h3 {
+  color: #327311;
 }
 
-a:visited {
-  text-decoration: none;
-  color: #BA9D88;
+h2 {
+  padding-top: 2em;
 }
 
-a:hover {
-  text-decoration: none;
-  color: #337AB7;
+a {
+  color: #6D6D6D;
+  
 }
 
-a:active {
-  text-decoration: none;
+p {
+  font-size: 1.2em;
 }
 
-form label {
-  background-color: black;
-  color: white;
-}
 
-form {
-  color: black;
-}
+
 
 

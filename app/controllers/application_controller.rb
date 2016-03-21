@@ -25,6 +25,20 @@ end
       end
     end
 
+    def redirect_if_not_your_section
+      @user = current_user
+      if @user.id != params[:user_id]
+        redirect "/users/#{@user.slug}/sections?error=Not your section to edit"
+      end
+    end
+
+    def redirect_if_not_your_video
+      @user = current_user
+      if @user.id != params[:user_id]
+        redirect "/users/#{@user.slug}/videos?error=Not your section to edit"
+      end
+    end
+
     def logged_in?
       !!session[:user_id]
     end

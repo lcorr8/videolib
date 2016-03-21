@@ -1,13 +1,12 @@
 
-
-
-#################### NEW VERSION ##################
-
-<h3>Here are your study videos</h3>
+<h2>Here are all your study videos</h2>
 
 <br>
 <% @videos.each do |video| %>
-  <p><a href="/videos/<%=video.id%>"><%= video.name %></a></p>
+  <p>
+  <% if video.watched == "yes" %>
+    <%= "✓" %>
+  <% end %>  <a href="/videos/<%=video.id%>"><%= video.name %></a></p>
 <% end %>
 
   

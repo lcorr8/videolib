@@ -1,23 +1,26 @@
 <h2>Edit A Video</h2>
-<br>
-<form action="/videos" method="POST">
+
+<form action="/videos/<%=@video.id%>/edit" method="POST">
   <h4>
   Video name: 
-  <input type="text" name="name" value="<%= @video.name %>"></input><br>
+  <input type="text" name="name" value="<%= @video.name %>"></input><br><br>
   Video link:
-  <input type="text" name="link" value="<%= @video.link %>"></input><br>
+  <input type="text" name="link" value="<%= @video.link %>"></input><br><br>
   Video year:
-  <input type="text" name="year" value="<%= @video.year %>"></input><br>
+  <input type="text" name="year" value="<%= @video.year %>"></input><br><br>
+  Embedded link:
+  <input type="text" name="embedded_link"></input><br><br>
   Video watched yet?
   <input type="radio" name="watched" value="no">No</input>
   <input type="radio" name="watched" value="yes">Yes</input>
-  <br><br><br>
+  <br><br>
   <p>Select the section the video belongs to: </p>
   <% @sections.each do |section| %>
-  <input type="radio" name="section_id" value="<%= section.id %>"><%=section.name%></input><br>
+  <input type="radio" name="section_id" value="<%= section.id %>" <%= 'checked' if section.id == @video.section_id%> ><%=section.name%></input><br>
   <% end %>
+  <br><br>
   
   </h4>
   
-  <input type="submit" value="Create"></input>
+  <input type="submit" value="Edit"></input>
 </form>

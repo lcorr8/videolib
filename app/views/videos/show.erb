@@ -1,20 +1,37 @@
-<h3>Video info</h3>
+<h2>Video info</h2>
 
-<p>Section: <%=@section.name%></p>  
+<p>Section: <% if @section.nil? %>
+<%= "No section selected" %>
+<% else %>
+<%=@section.name%></p> 
+<% end %> 
 <p>Video name: <%=@video.name%></p>
 <p>Video year: <%=@video.year%></p>
 <p>Video link: <a href="<%=@video.link%>"><%=@video.link%></a></p>
 <p>View status: <% if @video.watched == "yes" %>
-  <%= "viewed" %>
+  <%= " ✓ viewed" %>
   <% else %>
   <%= "not yet" %>
   <% end %></p>
+<p> Embedded video: <%=@video.embedded_link%></p>
+
+<br><br>
+
+<form style='display:inline;' action="/videos/<%=@video.id%>/edit" method="get">
+  <input style='display:inline;' type="submit" value="Edit Video"></input>
+</form>
+
+<form style='display:inline;' action="/videos/<%=@video.id%>/delete" method="get">
+  <input style='display:inline;' type="submit" value="Delete Video"></input>
+</form>
+
+<form style='display:inline;' action="/sections/<%=@video.section_id%>" method="get">
+  <input style='display:inline;' type="submit" value="Back to section"></input>
+</form>
 
 
 
-  <a href="/videos/<%=@video.id%>/edit">Edit Video</a>
-  <a href="/videos/<%=@video.id%>/delete">Delete Video</a>
-  <a href="/sections/<%=@video.section_id%>">Back to section</a>
+
 
 
 
