@@ -11,29 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160321153637) do
+ActiveRecord::Schema.define(version: 20160321213014) do
 
   create_table "sections", force: :cascade do |t|
     t.string  "name"
-    t.integer "video_ids"
     t.integer "user_id"
+    t.integer "video_ids"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.string "password_digest"
-    t.string "section_ids"
+    t.string  "username"
+    t.string  "email"
+    t.string  "password_digest"
+    t.integer "section_ids"
   end
 
   create_table "videos", force: :cascade do |t|
     t.string  "name"
     t.string  "link"
     t.string  "year"
-    t.integer "section_id"
-    t.integer "user_id"
     t.string  "watched"
     t.string  "embedded_link"
+    t.integer "section_id"
+    t.integer "user_id"
   end
 
 end

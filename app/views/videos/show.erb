@@ -13,7 +13,8 @@
   <% else %>
   <%= "not yet" %>
   <% end %></p>
-<p> Embedded video: <%=@video.embedded_link%></p>
+<p> Embedded video: <br>
+<%=@video.embedded_link%></p>
 
 <br><br>
 
@@ -28,6 +29,12 @@
 <form style='display:inline;' action="/sections/<%=@video.section_id%>" method="get">
   <input style='display:inline;' type="submit" value="Back to section"></input>
 </form>
+
+<form style='display:inline;' action="/videos/<%=@video.id%>/watched" method="get">
+  <input style='display:inline;' type="submit" value="Mark Watched"></input>
+</form>
+
+<br><br><br>
 
 
 

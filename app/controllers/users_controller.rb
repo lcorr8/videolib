@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
   post '/login' do 
     @user = User.find_by(username: params[:user][:username])
-    #verify username and password
+    verify username and password
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
       redirect "/users/#{@user.slug}/sections"
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
 
   get '/users/:slug/sections' do 
     #raise params.inspect
-    #@error_message = params[:error]
+    @error_message = params[:error]
     if logged_in?
     @users_page = User.find_by_slug(params["slug"])
     @user = current_user

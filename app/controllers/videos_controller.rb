@@ -58,15 +58,19 @@ class VideosController < ApplicationController
     redirect "/sections/#{@video.section_id}"
   end
 
-
-
-
-
   get '/videos/:id/delete' do 
     @user = current_user
     @video = Video.find_by_id(params[:id])
     @video.delete
     redirect "/users/#{@user.slug}/sections"
+  end
+
+  get '/videos/:id/watched' do 
+    @user = current_user
+    @video = Video.find_by_id(params[:id])
+    @video.watched = "yes"
+    @video.save
+    redirect "/sections/#{@video.section_id}"
   end
 
 

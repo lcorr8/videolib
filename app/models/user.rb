@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :sections
+  has_many :videos, through: :sections
 
   def slug
     self.username.downcase.gsub(" ","-")

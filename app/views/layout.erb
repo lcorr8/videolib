@@ -20,7 +20,9 @@
     <!-- navigation bar -->
     <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
+  
     <!-- Brand and toggle get grouped for better mobile display -->
+
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -33,16 +35,18 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
+    
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       <% if logged_in? %>
         <% @user = current_user %>
-
+        <li><a href="/users/<%=@user.username%>/sections">Your Sections</a></li>
+        <li><a href="/users/<%=@user.username%>/videos">Your Videos</a></li>
         <li><a href="/sections/new">New Section</a></li>
 
         <li><a href="/videos/new">New Video</a></li>
 
-        <li><a href="/users/<%=@user.username%>/videos">Your Videos</a></li>
+        
 
       </ul>
       
@@ -58,9 +62,14 @@
 
         <% end %>
       </ul>
+    
+      
     </div><!-- /.navbar-collapse -->
+    
   </div><!-- /.container-fluid -->
+
 </nav><!-- navigation bar -->
+
 
   <!-- user greeting -->
   <% if logged_in? %>
@@ -70,14 +79,18 @@
   <!-- user greeting -->
 
    <!-- flash message & body's body -->
+   
     <div class="container">
       <% if !@error_message.nil? %>
       <div class="alert alert-warning">
         <%= @error_message %>
       </div>
       <% end %>
+    
+      
       <%= yield %> 
-    </div>
+    
+    </div>  
     <!-- flash message & body's body -->
 
 

@@ -1,3 +1,5 @@
+require 'pry'
+
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
@@ -42,7 +44,6 @@ end
     def logged_in?
       !!session[:user_id]
     end
-
     def current_user
       User.find(session[:user_id])
     end
