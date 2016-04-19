@@ -73,15 +73,15 @@ class SectionsController < ApplicationController
 #################### OLD VERSION ##################
   #### is it useful to have a list of other students
   #### sections? might show repeats.
-  get '/sections' do 
-    if logged_in?
-      @user = current_user
-      @sections = Section.all
-      erb :'/sections/sections'
-    else
-      redirect_if_not_logged_in
-    end
-  end
+  #get '/sections' do 
+    #if logged_in?
+      #@user = current_user
+      #@sections = Section.all
+      #erb :'/sections/sections'
+    #else
+      #redirect_if_not_logged_in
+    #end
+  #end
 ####### 
 
 end #class 

@@ -92,14 +92,14 @@ class VideosController < ApplicationController
 #################### OLD VERSION ##################
   #### is it useful to have a list of other students
   #### videos? might show repeats.
-  get '/videos' do
-    if logged_in?
-      @videos = Video.all
-      erb :'/videos/videos'
-    else
-      redirect_if_not_logged_in
-    end
-  end
+  #get '/videos' do
+    #if logged_in?
+      #@videos = Video.all
+      #erb :'/videos/videos'
+    #else
+      #redirect_if_not_logged_in
+    #end
+  #end
   ######
 
 end

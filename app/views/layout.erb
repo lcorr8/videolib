@@ -43,23 +43,17 @@
         <li><a href="/users/<%=@user.username%>/sections">Your Sections</a></li>
         <li><a href="/users/<%=@user.username%>/videos">Your Videos</a></li>
         <li><a href="/sections/new">New Section</a></li>
-
         <li><a href="/videos/new">New Video</a></li>
-
-        
-
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/sections">All Sections</a></li>
-        <li><a href="/videos">All Videos</a></li>
-        
+        <!--  <li><a href="/sections">All Sections</a></li>  -->
+        <!--  <li><a href="/videos">All Videos</a></li>  -->
         <li class="active"><a href="/logout"> Log Out </a></li>
 
       <% else %>
         <li><a href="/signup">Sign Up</a></li>
         <li class="active"><a href="/login"> Log In </a></li>
-
      <% end %>
       </ul>
     
