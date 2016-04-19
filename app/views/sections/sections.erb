@@ -1,7 +1,7 @@
 <h2>All students' study sections:</h2>
 
 <% @sections.each do |section| %>
-  <p><a href="/sections/<%=section.id%>"><%= section.name %></p>
+  <p><a href="/sections/<%=section.id%>"><%= section.name %> - <%= section.user.username %></p>
 <% end  %>
 
 

@@ -35,11 +35,16 @@ class VideosController < ApplicationController
   end
 
   get '/videos/:id/edit' do 
-    if logged_in?
+
+    if logged_in? 
       @user = current_user
       @video = Video.find_by_id(params[:id])
       @sections = Section.all.select{|section| section.user_id == @user.id}
-      erb :'/videos/edit'
+      if  @video.user_id == @user.id
+       erb :'/videos/edit'
+     else
+      redirect "/users/#{@user.slug}/videos?error=Not your video to edit"
+     end
     else
       redirect_if_not_logged_in
     end
@@ -51,18 +56,28 @@ class VideosController < ApplicationController
     @video.name = params["name"]
     @video.link = params["link"]
     @video.year = params["year"]
-    @video.embedded_link = params["embedded_link"]
     @video.watched = params["watched"]
     @video.section_id = params["section_id"]
+    if params["embedded_link"] != ""
+      @video.embedded_link = params["embedded_link"]
+    end
     @video.save
     redirect "/sections/#{@video.section_id}"
   end
 
-  get '/videos/:id/delete' do 
+  get '/videos/:id/delete' do
+    if logged_in? 
     @user = current_user
     @video = Video.find_by_id(params[:id])
-    @video.delete
-    redirect "/users/#{@user.slug}/sections"
+      if @video.user_id == @user.id
+        @video.delete
+        redirect "/users/#{@user.slug}/sections"
+      else 
+        redirect "/users/#{@user.slug}/videos?error=Not your video to delete"
+      end
+    else
+      redirect_if_not_logged_in
+    end
   end
 
   get '/videos/:id/watched' do 

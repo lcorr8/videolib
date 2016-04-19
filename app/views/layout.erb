@@ -20,7 +20,7 @@
     <!-- navigation bar -->
     <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
-  
+
     <!-- Brand and toggle get grouped for better mobile display -->
 
     <div class="navbar-header">
@@ -30,12 +30,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <% @user = current_user %>
-      <a class="navbar-brand" href="/users/<%=@user.username%>/sections">VideoLib</a>
+      <!--<% #@user = current_user %> -->
+      <a class="navbar-brand" href="#">VideoLib</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    
+   
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       <% if logged_in? %>
@@ -56,30 +56,35 @@
         
         <li class="active"><a href="/logout"> Log Out </a></li>
 
-        <% else %>
+      <% else %>
         <li><a href="/signup">Sign Up</a></li>
         <li class="active"><a href="/login"> Log In </a></li>
 
-        <% end %>
+     <% end %>
       </ul>
     
-      
-    </div><!-- /.navbar-collapse -->
+     
+   </div>     <!-- /.navbar-collapse -->
     
-  </div><!-- /.container-fluid -->
+  </div>     <!-- /.container-fluid -->
 
-</nav><!-- navigation bar -->
+</nav>      <!-- navigation bar -->
 
 
   <!-- user greeting -->
   <% if logged_in? %>
+  
     <% @user = current_user %>
-    <h4>Welcome, <%=current_user.username %>!</h4>
-  <% end %>  
+
+    <h4>Welcome, <%=@user.username %>!</h4>
+
+  
+  <% end %> 
+
   <!-- user greeting -->
 
    <!-- flash message & body's body -->
-   
+  
     <div class="container">
       <% if !@error_message.nil? %>
       <div class="alert alert-warning">
@@ -87,14 +92,15 @@
       </div>
       <% end %>
     
-      
+     
       <%= yield %> 
     
-    </div>  
+    </div>   
     <!-- flash message & body's body -->
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
   </body>
 </html>

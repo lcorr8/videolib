@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do 
-    #raise params.inspect
+#    #raise params.inspect
     if params[:user][:username] == "" || params[:user][:password] == ""
       redirect '/signup'
     else
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
   post '/login' do 
     @user = User.find_by(username: params[:user][:username])
-    verify username and password
+    #verify username and password
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
       redirect "/users/#{@user.slug}/sections"
@@ -42,12 +42,13 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do 
-    if logged_in?
+    #raise params.inspect 
+    #if logged_in?
       session.clear
       redirect '/'
-    else
-      redirect '/'
-    end
+    #else
+      #redirect '/'
+    #end
   end
 
   get '/users/:slug/sections' do 

@@ -9,7 +9,7 @@
   Video year:
   <input type="text" name="year" value="<%= @video.year %>"></input><br><br>
   Embedded link:
-  <input type="text" name="embedded_link" value="<%=@video.embedded_link%>"></input><br><br>
+  <input type="text" name="embedded_link"></input><br><br>
   Video watched yet?
   <input type="radio" name="watched" value="no" <%= 'checked' if @video.watched == "no" %> >No</input>
   <input type="radio" name="watched" value="yes" <%= 'checked' if @video.watched == "yes" %> >Yes</input>
