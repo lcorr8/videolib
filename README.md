@@ -1,4 +1,4 @@
-# APP name
+# VideoLib
 
 ## Usage
 
