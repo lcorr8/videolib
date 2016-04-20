@@ -15,11 +15,12 @@
   <% end %>  
   <a href="/videos/<%= video.id %>"><%= video.name %></a>
 : <%= video.year %>. 
-  <% if @user.id == @section.user_id %>
+<!--
+  <% #if @user.id == @section.user_id %>
   <a href="/videos/<%=video.id%>/edit">edit</a>
   <a href="/videos/<%=video.id%>/delete">delete</a>
-  <% end %></p>
-
+  <% #end %></p>
+-->
   <br>
 <% end %>
 <br>

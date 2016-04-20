@@ -87,6 +87,23 @@ class UsersController < ApplicationController
     end
   end
 ###################################################
+
+get '/users/:slug/videos/not-watched' do 
+    #raise params.inspect
+    @error_message = params[:error]
+    if logged_in?
+    @users_page = User.find_by_slug(params["slug"])
+    @user = current_user
+      if @users_page == @user
+        @videos = Video.all.select{|video| video.user_id == @user.id && video.watched == "no"}
+        erb :'/videos/your_videos_not_watched'
+      else
+        redirect '/videos'
+      end
+    else
+      redirect '/'
+    end
+  end
  
 end #end of class
 
