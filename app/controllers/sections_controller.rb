@@ -14,7 +14,11 @@ class SectionsController < ApplicationController
       @section = Section.find_by_id(params[:id])
       @user = current_user
       @videos = @section.videos
-      erb :'/sections/show'
+      if @section.user_id == @user.id
+        erb :'/sections/show'
+      else
+        redirect "/users/#{@user.slug}/sections?error=Not your section to view, see your sections below"
+      end
     else
       redirect_if_not_logged_in
     end

@@ -72,6 +72,7 @@ class UsersController < ApplicationController
 #user video's list is kind of useless if not organized.
   get '/users/:slug/videos' do 
     #raise params.inspect
+    @error_message = params[:error]
     if logged_in?
     @users_page = User.find_by_slug(params["slug"])
     @user = current_user
