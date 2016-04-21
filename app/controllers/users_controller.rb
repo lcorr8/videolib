@@ -1,20 +1,20 @@
 class UsersController < ApplicationController 
 
   get '/signup' do
+    @error_message = params[:error]
     if logged_in?
       @user = current_user
-      redirect redirect "/users/#{@user.slug}/sections"
+      redirect "/users/#{@user.slug}/sections"
     else
       erb :'/users/create_user'
     end
   end
 
   post '/signup' do 
-#    #raise params.inspect
-    if params[:user][:username] == "" || params[:user][:password] == ""
-      redirect '/signup'
+    if usernames_taken.include?(params[:user][:username])
+      redirect "/signup?error=Username is already taken"
     else
-      @user = User.create(username: params[:user][:username], password: params[:user][:password])
+      @user = User.create(username: params[:user][:username], password: params[:user][:password], email: params[:user][:email])
       session[:user_id] = @user.id
       redirect '/login'
     end
@@ -37,18 +37,13 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect "/users/#{@user.slug}/sections"
     else
-      redirect '/login'
+      redirect '/login?error=Incorrect credentials'
     end
   end
 
   get '/logout' do 
-    #raise params.inspect 
-    #if logged_in?
-      session.clear
-      redirect '/'
-    #else
-      #redirect '/'
-    #end
+    session.clear
+    redirect '/'
   end
 
   get '/users/:slug/sections' do 
@@ -57,13 +52,13 @@ class UsersController < ApplicationController
     if logged_in?
     @users_page = User.find_by_slug(params["slug"])
     @user = current_user
-      if @users_page == @user
+      if @users_page == @user #page's user the same as current user
         erb :'/sections/your_sections'
       else
         redirect '/sections'
       end
     else
-      redirect '/'
+      redirect_if_not_logged_in
     end
   end
 
@@ -83,7 +78,7 @@ class UsersController < ApplicationController
         redirect '/videos'
       end
     else
-      redirect '/'
+      redirect_if_not_logged_in
     end
   end
 ###################################################
@@ -101,7 +96,7 @@ get '/users/:slug/videos/not-watched' do
         redirect '/videos'
       end
     else
-      redirect '/'
+      redirect_if_not_logged_in
     end
   end
  

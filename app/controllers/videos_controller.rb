@@ -3,6 +3,7 @@ require 'pry'
 class VideosController < ApplicationController 
 
   get '/videos/new' do 
+    @error_message = params[:error]
     if logged_in?
       @user = current_user
       @sections = Section.all.select{|section| section.user_id == @user.id}
@@ -13,17 +14,21 @@ class VideosController < ApplicationController
   end
 
   post '/videos' do #from new video
-    #raise params.inspect
     @user = current_user
-    @video = Video.new(name: params["name"], link: params["link"], year: params["year"], watched: params["watched"], embedded_link: params["embedded_link"], section_id: params["section_id"])
-    @video.user_id = @user.id
-    @video.save
-    redirect "/sections/#{@video.section_id}"
+    if users_videos_by_link.include?(params["link"])
+      @current_video = users_videos.find{|video| video.link == params["link"] }
+      redirect "/videos/#{@current_video.id}?error=Video already on file"
+      #redirect to the video that was already created rather than a new video form
+    else
+      @video = Video.new(name: params["name"], link: params["link"], year: params["year"], watched: params["watched"], embedded_link: params["embedded_link"], section_id: params["section_id"])
+      @video.user_id = @user.id
+      @video.save
+      redirect "/sections/#{@video.section_id}"
+    end
   end
 
-  
-
   get '/videos/:id' do 
+    @error_message = params[:error]
     if logged_in?
       @user = current_user
       @video = Video.find_by_id(params[:id])
@@ -85,12 +90,20 @@ class VideosController < ApplicationController
     end
   end
 
-  get '/videos/:id/watched' do 
-    @user = current_user
-    @video = Video.find_by_id(params[:id])
-    @video.watched = "yes"
-    @video.save
-    redirect "/sections/#{@video.section_id}"
+  get '/videos/:id/watched' do #are you logged in? is it your video?
+    if logged_in?
+      @user = current_user
+      @video = Video.find_by_id(params[:id])
+        if @video.user_id == @user.id
+          @video.watched = "yes"
+          @video.save
+          redirect "/sections/#{@video.section_id}"
+        else
+          redirect "/users/#{@user.slug}/videos?error=Not your video to mark watched"
+        end
+    else
+      redirect_if_not_logged_in
+    end
   end
 
 

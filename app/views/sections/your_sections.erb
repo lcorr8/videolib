@@ -1,3 +1,10 @@
+<!-- user greeting -->
+<% if logged_in? %>
+  <% @user = current_user %>
+  <h4>Welcome, <%=@user.username %>!</h4>
+<% end %> 
+<!-- user greeting -->
+
 <h2>Which section would you like to review?</h2>
 <h3>Full Stack Web Dev Program:</h3>
 

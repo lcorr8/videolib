@@ -1,6 +1,7 @@
 class SectionsController < ApplicationController 
 
-  get '/sections/new' do 
+  get '/sections/new' do
+    @error_message = params[:error] 
     if logged_in?
       erb :'/sections/new'
     else
@@ -10,6 +11,7 @@ class SectionsController < ApplicationController
 
   get '/sections/:id' do 
     #raise params.inspect
+    @error_message = params[:error]
     if logged_in?
       @section = Section.find_by_id(params[:id])
       @user = current_user
@@ -42,9 +44,13 @@ class SectionsController < ApplicationController
     if logged_in?
       @user = current_user
       @section = Section.find_by_id(params[:id])
-      if @user.id == @section.user_id
-        @section.delete        
-        redirect "/users/#{@user.slug}/sections"
+      if @user.id == @section.user_id 
+        if @section.videos.count == 0
+          @section.delete        
+          redirect "/users/#{@user.slug}/sections"
+        else
+          redirect "/users/#{@user.slug}/sections?error=Unable to delete section because it still contains videos"
+        end
       else
         redirect "/users/#{@user.slug}/sections?error=Not your section to delete"
       end
@@ -56,23 +62,30 @@ class SectionsController < ApplicationController
   post '/sections' do 
     #raise params.inspect
     @user = current_user
-    @section = Section.new(name: params["name"])
-    @section.user_id = @user.id
-    @section.save
-    redirect "/users/#{@user.slug}/sections"
+    if users_sections_by_name.include?(params["name"])
+      @current_section = user_sections.find{|section| section.name == params["name"]}
+      redirect "/sections/#{@current_section.id}?error=Section already exists"
+    else
+      @section = Section.new(name: params["name"])
+      @section.user_id = @user.id
+      @section.save
+      redirect "/users/#{@user.slug}/sections"
+    end
   end
 
   post '/sections/:id' do
     #raise params.inspect
+
     @section = Section.find_by_id(params[:id])
     if params["name"] != ""
       @section.name = params["name"]
       @section.save
       redirect "/sections/#{@section.id}"
     else
-      redirect "/sections/#{@section.id}/edit"
+      redirect "/sections/#{@section.id}/edit?error=No empty fields allowed"
     end
   end
+end #class 
 
 #################### OLD VERSION ##################
   #### is it useful to have a list of other students
@@ -88,7 +101,7 @@ class SectionsController < ApplicationController
   #end
 ####### 
 
-end #class 
+
 
 
 

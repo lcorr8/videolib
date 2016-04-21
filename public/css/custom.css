@@ -8,10 +8,13 @@
   src: url("../fonts/MoonBold.otf");
 }
 
+input[type='text'] {
+  font-family: monospace; 
+}
+
 nav {
   font-family: "MoonLight";
   font-size: 1.3em;
-  
 }
 
 
@@ -19,16 +22,17 @@ body {
   background-image: url('/img/white-pineapple.jpeg');
   background-size: cover;
   font-family: "MoonLight";
-  
 }
 
 h2, h3 {
   color: #327311;
 }
 
+/* 
 h2 {
   padding-top: 2em;
 }
+*/
 
 a {
   color: #6D6D6D;

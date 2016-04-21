@@ -70,30 +70,16 @@
 </nav>      <!-- navigation bar -->
 
 
-  <!-- user greeting -->
-  <% if logged_in? %>
-  
-    <% @user = current_user %>
-
-    <h4>Welcome, <%=@user.username %>!</h4>
-
-  
-  <% end %> 
-
-  <!-- user greeting -->
-
    <!-- flash message & body's body -->
-  
+  <br><br><br>
     <div class="container">
       <% if !@error_message.nil? %>
-      <div class="alert alert-warning">
-        <%= @error_message %>
-      </div>
+        <div class="alert alert-warning" role="alert">
+          <%= @error_message %>
+        </div>
       <% end %>
-    
-     
+
       <%= yield %> 
-    
     </div>   
     <!-- flash message & body's body -->
 
