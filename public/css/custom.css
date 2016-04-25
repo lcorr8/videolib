@@ -2,12 +2,12 @@
   font-family: "MoonLight";
   src: url("../fonts/MoonLight.otf");
 }
-
+/*
 @font-face {
   font-family: "MoonBold";
   src: url("../fonts/MoonBold.otf");
 }
-
+*/
 input[type='text'] {
   font-family: monospace; 
 }

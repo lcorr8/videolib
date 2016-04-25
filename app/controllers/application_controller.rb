@@ -13,8 +13,8 @@ class ApplicationController < Sinatra::Base
 
   get '/' do 
     if logged_in?
-      @user = current_user
-      redirect "/users/#{@user.slug}/sections"
+      #@user = current_user
+      redirect "/users/#{current_user.slug}/sections"
     else
        erb :index
     end
@@ -27,30 +27,15 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-####### refactor to work properly, currently not checking if video belongs to user, only checking if user is logged in #####
-    #def redirect_if_not_your_section
-#      @user = current_user
-#      if @user.id != params[:user_id]
-#        redirect "/users/#{@user.slug}/sections?error=Not your section to edit"
-#      end
-#    end
-#    
-#    def redirect_if_not_your_video
-#      @user = current_user
-#      if @user.id != params[:user_id]
-#        redirect "/users/#{@user.slug}/videos?error=Not your video to edit"
-#      end
-#    end
-
-    def logged_in?
-      !!session[:user_id]
+    def logged_in? 
+      !!current_user
     end
 
-    def current_user
-      User.find(session[:user_id])
+    def current_user 
+      @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
     end
 
-    def usernames_taken
+    def usernames_taken #refactor
       @usernames_taken = []
       @users = User.all
       @users.each do |user|
@@ -59,13 +44,13 @@ class ApplicationController < Sinatra::Base
       @usernames_taken
     end
 
-    def users_videos
+    def users_videos #refactor
       @user = current_user
       @videos = Video.all
       @users_videos = @videos.select{|video| video.user_id == @user.id}
     end
 
-    def users_videos_by_link
+    def users_videos_by_link #refactor
       @videos_on_file = []
       users_videos.each do |video|
         @videos_on_file << video.link
@@ -73,13 +58,13 @@ class ApplicationController < Sinatra::Base
       @videos_on_file
     end  
 
-    def user_sections
+    def user_sections #refactor
       @user = current_user
       @sections = Section.all 
       @users_sections = @sections.select{|section| section.user_id == @user.id}
     end
 
-    def users_sections_by_name
+    def users_sections_by_name #refactor
       @sections_on_file = []
       user_sections.each do |section|
         @sections_on_file << section.name

@@ -1,10 +1,6 @@
 <h2>Video info</h2>
 
-<p>Section: <% if @section.name.nil? %>
-<%= "No section selected" %>
-<% else %>
-<%=@section.name%></p> 
-<% end %> 
+<p>Section: <%=@video.section.name%></p> 
 <p>Video name: <%=@video.name%></p>
 <p>Video year: <%=@video.year%></p>
 <p>Video link: <a href="<%=@video.link%>"><%=@video.link%></a></p>

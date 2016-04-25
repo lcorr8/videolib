@@ -3,8 +3,7 @@ class UsersController < ApplicationController
   get '/signup' do
     @error_message = params[:error]
     if logged_in?
-      @user = current_user
-      redirect "/users/#{@user.slug}/sections"
+      redirect "/users/#{current_user.slug}/sections"
     else
       erb :'/users/create_user'
     end
@@ -22,9 +21,8 @@ class UsersController < ApplicationController
 
   get '/login' do
     @error_message = params[:error]
-    if logged_in?
-      @user = current_user
-      redirect "/users/#{@user.slug}/sections"
+    if logged_in? 
+      redirect "/users/#{current_user.slug}/sections"
     else 
       erb :'/users/login'
     end
@@ -32,12 +30,11 @@ class UsersController < ApplicationController
 
   post '/login' do 
     @user = User.find_by(username: params[:user][:username])
-    #verify username and password
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
-      redirect "/users/#{@user.slug}/sections"
+      redirect "/users/#{@user.slug}/sections" #should this just render the user's sections?
     else
-      redirect '/login?error=Incorrect credentials'
+      redirect '/login?error=Incorrect credentials' #should this render the login page if i change how i did errors?
     end
   end
 
@@ -47,53 +44,40 @@ class UsersController < ApplicationController
   end
 
   get '/users/:slug/sections' do 
-    #raise params.inspect
     @error_message = params[:error]
     if logged_in?
-    @users_page = User.find_by_slug(params["slug"])
-    @user = current_user
-      if @users_page == @user #page's user the same as current user
+      if current_user == User.find_by_slug(params["slug"]) #is page's user the same as current user? 
         erb :'/sections/your_sections'
       else
-        redirect '/sections'
+        redirect "/users/#{current_user.slug}/sections?error=Not your section to view, see your sections below"
       end
     else
       redirect_if_not_logged_in
     end
   end
 
-
-
-#user video's list is kind of useless if not organized.
   get '/users/:slug/videos' do 
-    #raise params.inspect
     @error_message = params[:error]
     if logged_in?
-    @users_page = User.find_by_slug(params["slug"])
-    @user = current_user
-      if @users_page == @user
-        @videos = Video.all.select{|video| video.user_id == @user.id}
+      if current_user == User.find_by_slug(params["slug"])
+        @videos = current_user.videos
         erb :'/videos/your_videos'
       else
-        redirect '/videos'
+        redirect "/users/#{current_user.slug}/videos?error=Not your videos to view, see your videos below"
       end
     else
       redirect_if_not_logged_in
     end
   end
-###################################################
 
 get '/users/:slug/videos/not-watched' do 
-    #raise params.inspect
     @error_message = params[:error]
     if logged_in?
-    @users_page = User.find_by_slug(params["slug"])
-    @user = current_user
-      if @users_page == @user
-        @videos = Video.all.select{|video| video.user_id == @user.id && video.watched == "no"}
+      if current_user == User.find_by_slug(params["slug"])
+        @videos = current_user.videos.select{|video| video.watched == "no"}
         erb :'/videos/your_videos_not_watched'
       else
-        redirect '/videos'
+        redirect "/users/#{current_user.slug}/videos/not-watched?error=Not your videos to view, see your videos below"
       end
     else
       redirect_if_not_logged_in

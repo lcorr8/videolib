@@ -15,7 +15,7 @@
   <input type="radio" name="watched" value="yes" <%= 'checked' if @video.watched == "yes" %> >Yes</input>
   <br><br>
   <p>Select the section the video belongs to: </p>
-  <% @sections.each do |section| %>
+  <% current_user.sections.each do |section| %>
   <input type="radio" name="section_id" value="<%= section.id %>" required <%= 'checked' if section.id == @video.section_id%> ><%=section.name%></input><br>
   <% end %>
   <br><br>

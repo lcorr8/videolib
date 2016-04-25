@@ -42,10 +42,9 @@
    
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <% if logged_in? %>
-        <% @user = current_user %>
         <ul class="nav navbar-nav">
-          <li><a href="/users/<%=@user.username%>/sections">Your Sections</a></li>
-          <li><a href="/users/<%=@user.username%>/videos">Your Videos</a></li>
+          <li><a href="/users/<%=current_user.username%>/sections">Sections</a></li>
+          <li><a href="/users/<%=current_user.username%>/videos">Videos</a></li>
           <li><a href="/sections/new">New Section</a></li>
           <li><a href="/videos/new">New Video</a></li>
         </ul>
