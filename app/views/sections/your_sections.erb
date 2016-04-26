@@ -1,7 +1,7 @@
 <h2>Which section would you like to review?</h2>
 <h3>Full Stack Web Dev Program:</h3>
 
-<% @user.sections.each do |section| %>
+<% current_user.sections.each do |section| %>
   <p><a href="/sections/<%=section.id%>"><%= section.name %></p>
 <% end  %>
 

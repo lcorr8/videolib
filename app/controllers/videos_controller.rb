@@ -30,7 +30,8 @@ class VideosController < ApplicationController
       if @video = current_user.videos.find_by_id(params[:id]) 
         erb :'/videos/show'
       else
-        redirect "/users/#{current_user.slug}/videos?error=Not your video to view"
+        redirect "/users/#{current_user.slug}/videos?error=Not your video to view, see your videos below"
+        #erb :'/videos/your_videos', locals:{message:"Not your video to view, see your videos below"}    
       end
     else
       redirect_if_not_logged_in
@@ -42,7 +43,8 @@ class VideosController < ApplicationController
       if @video = current_user.videos.find_by_id(params[:id])
        erb :'/videos/edit'
      else
-      redirect "/users/#{current_user.slug}/videos?error=Not your video to edit"
+      redirect "/users/#{current_user.slug}/videos?error=Not your video to edit, see your videos below"
+      #erb :'/videos/your_videos', locals:{message:"Not your video to edit, see your videos below"}
      end
     else
       redirect_if_not_logged_in
@@ -71,7 +73,8 @@ class VideosController < ApplicationController
         @video.delete
         redirect "/users/#{current_user.slug}/sections"
       else 
-        redirect "/users/#{current_user.slug}/videos?error=Not your video to delete"
+        redirect "/users/#{current_user.slug}/videos?error=Not your video to delete, see your videos below"
+        #erb :'/videos/your_videos', locals:{message:"Not your video to delete, see your videos below"}
       end
     else
       redirect_if_not_logged_in
@@ -85,7 +88,8 @@ class VideosController < ApplicationController
           @video.save
           redirect "/sections/#{@video.section_id}"
         else
-          redirect "/users/#{current_user.slug}/videos?error=Not your video to mark watched"
+          redirect "/users/#{current_user.slug}/videos?error=Not your video to mark watched, see your videos below"
+          #erb :'/videos/your_videos', locals:{message:"Not your video to mark watched, see your videos below"}
         end
     else
       redirect_if_not_logged_in

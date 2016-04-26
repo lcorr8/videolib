@@ -13,7 +13,6 @@ class ApplicationController < Sinatra::Base
 
   get '/' do 
     if logged_in?
-      #@user = current_user
       redirect "/users/#{current_user.slug}/sections"
     else
        erb :index
@@ -24,6 +23,7 @@ class ApplicationController < Sinatra::Base
     def redirect_if_not_logged_in
       if !logged_in?
         redirect "/login?error=You have to be logged in to do that"
+        #erb :'/users/login', locals:{message:"You have to be logged in to do that"}
       end
     end
 
@@ -45,9 +45,8 @@ class ApplicationController < Sinatra::Base
     end
 
     def users_videos #refactor
-      @user = current_user
       @videos = Video.all
-      @users_videos = @videos.select{|video| video.user_id == @user.id}
+      @users_videos = @videos.select{|video| video.user_id == current_user.id}
     end
 
     def users_videos_by_link #refactor
@@ -59,9 +58,8 @@ class ApplicationController < Sinatra::Base
     end  
 
     def user_sections #refactor
-      @user = current_user
       @sections = Section.all 
-      @users_sections = @sections.select{|section| section.user_id == @user.id}
+      @users_sections = @sections.select{|section| section.user_id == current_user.id}
     end
 
     def users_sections_by_name #refactor

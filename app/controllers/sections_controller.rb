@@ -16,6 +16,7 @@ class SectionsController < ApplicationController
         erb :'/sections/show'
       else
         redirect "/users/#{current_user.slug}/sections?error=Not your section to view, see your sections below"
+        #erb :'/sections/your_sections', locals:{message:"Not your section to view, see your sections below"}
       end
     else
       redirect_if_not_logged_in
@@ -29,6 +30,7 @@ class SectionsController < ApplicationController
         erb :'/sections/edit'
       else  
         redirect "/users/#{current_user.slug}/sections?error=Not your section to edit, see your sections below"
+        #erb :'/sections/your_sections', locals:{message:"Not your section to edit, see your sections below"}
       end
     else
       redirect_if_not_logged_in
@@ -43,9 +45,11 @@ class SectionsController < ApplicationController
           redirect "/users/#{current_user.slug}/sections"
         else
           redirect "/users/#{current_user.slug}/sections?error=Unable to delete section because it still contains videos"
+          #erb :'/sections/your_sections', locals:{message:"Unable to delete section because it still contains videos"}
         end
       else
         redirect "/users/#{current_user.slug}/sections?error=Not your section to delete"
+        #erb :'/sections/your_sections', locals:{message:"Not your section to delete, see your sections below"}
       end
     else
       redirect_if_not_logged_in
@@ -53,7 +57,6 @@ class SectionsController < ApplicationController
   end
 
   post '/sections' do 
-    @user = current_user
     if users_sections_by_name.include?(params["name"])
       @current_section = user_sections.find{|section| section.name == params["name"]}
       redirect "/sections/#{@current_section.id}?error=Section already exists"
@@ -61,7 +64,7 @@ class SectionsController < ApplicationController
       @section = Section.new(name: params["name"])
       @section.user_id = current_user.id
       @section.save
-      redirect "/users/#{@user.slug}/sections"
+      redirect "/users/#{current_user.slug}/sections"
     end
   end
 
