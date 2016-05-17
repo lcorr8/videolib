@@ -4,6 +4,8 @@ VideoLib allows you to make an account and to essentially make a video library. 
 
 ## Usage
 Get the LV seeds file from the LV slack.
+
 To use this app, just clone, run `rake db:migrate` and then run `shotgun`.
+
 Everything should be set up.
 
