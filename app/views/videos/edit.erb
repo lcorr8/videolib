@@ -1,6 +1,6 @@
 <h2>Edit A Video</h2>
 
-<form action="/videos/<%=@video.id%>" method="POST">
+<form action="/videos/<%=@video.id%>/edit" method="POST">
   <h4>
   Video name: 
   <input type="text" name="name" value="<%= @video.name %>" required></input><br><br>

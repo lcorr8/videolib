@@ -54,17 +54,12 @@ class VideosController < ApplicationController
   post '/videos/:id/edit' do
     #raise params.inspect
     @video = Video.find_by_id(params[:id])
-    @video.name = params["name"]
-    @video.link = params["link"]
-    @video.year = params["year"]
-    @video.watched = params["watched"]
-    @video.section_id = params["section_id"]
-    @video.user_id = current_user.id
+    @video.update(name: params["name"], link: params["link"], year: params["year"], watched: params["watched"], section_id: params["section_id"])
     if params["embedded_link"] != ""
       @video.embedded_link = params["embedded_link"]
+      @video.save
     end
-    @video.save
-    redirect "/sections/#{@video.section_id}"
+    redirect "/videos/#{@video.id}"
   end
 
   get '/videos/:id/delete' do
